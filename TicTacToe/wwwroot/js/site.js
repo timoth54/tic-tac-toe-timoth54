@@ -3,6 +3,47 @@
 
 // Write your Javascript code.
 
+var squares = document.getElementsByClassName("square");
+var dragging;
+for (var i = 0; i < squares.length; i++){
+    squares[i].addEventListener('dragenter', onDragEnter);
+    squares[i].addEventListener('dragstart', onDragStart);
+    squares[i].addEventListener('dragend', onDragEnd);
+    squares[i].addEventListener('dragleave', onDragLeave)
+}
+
+function onDrop(event) {
+    console.log(event);
+    event.target = event;
+}
+
+function onDragStart(event) {
+    console.log(event.target.dataset)
+    dragging = {
+        x: event.target.dataset.x,
+        y: event.target.dataset.y
+    }
+}
+
+function onDragEnd(event) {
+    console.log(event);
+}
+
+function onDragEnter(event) {
+    if (event.target.children.length > 0) return;
+    if (event.target.classList.contains("checker")) return;
+    if (event.target.classList.contains("red")) return;
+    event.preventDefault();
+    event
+    event.target.style.backgroundColor = "yellow";
+}
+
+function onDragLeave(event) {
+    event.target.style.backgroundColor = null;
+    console.log('dragleave', event);
+}
+
+/*
 var form = document.getElementsById("board");
 var cells = document.getElementsByClassName("cell");
 for (var i = 0; i < cells.length; i++) {
@@ -12,6 +53,8 @@ for (var i = 0; i < cells.length; i++) {
 }
 
 var turn = "x";
+*/
+
 /*
 function setTurn() {
     var turnElement = document.getElementById("turn");
